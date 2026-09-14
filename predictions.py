@@ -1,34 +1,39 @@
 import pandas as pd
 import joblib
-from config import MODEL_FILE, SCALER_FILE
-from riskscore import calculate_probability, calculate_riskscore, classify_risk
+
+from config import MODEL_FILE, PREPROCESSOR_FILE
+from riskscore import calculate_probability, calculate_risk_score, classify_risk
+
 
 def load_artifacts():
     model = joblib.load(MODEL_FILE)
-    scaler = joblib.load(SCALER_FILE)
-    return model, scaler
+    preprocessor = joblib.load(PREPROCESSOR_FILE)
+    return model, preprocessor
 
-def preprocess_input(customer_data, scaler):
-    scaled_data = scaler.transform(customer_data)
-    return scaled_data
+
+def preprocess_input(customer_data, preprocessor):
+    processed_data = preprocessor.transform(customer_data)
+    return processed_data
+
 
 def predict_customer(customer_data):
-    model, scaler = load_artifacts()
-    preprocessed_data = preprocess_input(customer_data, scaler)
-    prediction = model.predict(preprocessed_data)[0]
-    probability = calculate_probability(model, processed_data)  
-    riskscore = calculate_riskscore(probability)
-    risk_category = classify_risk(riskscore)
-    
-    return {
-        "Prediction": prediction,
-        "Probability": probability,
-        "RiskScore": riskscore,
-        "RiskCategory": risk_category
-    }
-    if __name__ == "__main__":
+    model, preprocessor = load_artifacts()
+    preprocessed_data = preprocess_input(customer_data, preprocessor)
+    probability = calculate_probability(model, preprocessed_data)
+    risk_score = calculate_risk_score(probability)
+    risk_category = classify_risk(risk_score)
 
-        sample_data = pd.DataFrame({
+    return {
+        "Prediction": "Bad Credit" if probability >= 0.5 else "Good Credit",
+        "Probability": round(probability, 4),
+        "Risk Score": risk_score,
+        "Risk Category": risk_category,
+    }
+
+
+if __name__ == "__main__":
+    sample_data = pd.DataFrame(
+        {
             "laufkont": [1],
             "laufzeit": [24],
             "moral": [2],
@@ -48,14 +53,12 @@ def predict_customer(customer_data):
             "beruf": [3],
             "pers": [1],
             "telef": [1],
-            "gastarb": [1]
-        })
+            "gastarb": [1],
+        }
+    )
 
-        result = predict_customer(sample_data)
-
-        print("\nPrediction Result:")
-        print("=" * 50)
-
-        for key, value in result.items():
-            print(f"{key}: {value}")
-
+    result = predict_customer(sample_data)
+    print("\nPrediction Result:")
+    print("=" * 50)
+    for key, value in result.items():
+        print(f"{key}: {value}")

@@ -4,6 +4,7 @@ __pycache__/
 *.pyo
 
 # Virtual Environment
+venv/
 .venv/
 env/
 
@@ -26,5 +27,3 @@ data/processed/
 # Operating System
 .DS_Store
 Thumbs.db
-
-D:\prjct2\credit risk\data\raw\german_credit_data.csv

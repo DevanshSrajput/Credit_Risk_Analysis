@@ -1,4 +1,4 @@
-from pathlib import Path 
+from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent
 DATA_DIR = BASE_DIR / "data"
@@ -16,7 +16,17 @@ TARGET_COLUMN = "kredit"
 
 TEST_SIZE = 0.2
 RANDOM_STATE = 42
-MODEL_FILE = MODELS_DIR / "credit_risk_model.pkl"
-SCALER_FILE = MODELS_DIR / "scaler.pkl"
-ENCODER_FILE = MODELS_DIR / "encoder.pkl"
 
+MODEL_FILE = MODELS_DIR / "credit_risk_model.pkl"
+PREPROCESSOR_FILE = MODELS_DIR / "preprocessor.pkl"
+MODEL_METADATA_FILE = MODELS_DIR / "model_metadata.pkl"
+
+NUMERICAL_FEATURES = ["laufzeit", "hoehe", "alter"]
+CATEGORICAL_FEATURES = [
+    "laufkont", "moral", "verw", "sparkont", "beszeit",
+    "rate", "famges", "buerge", "wohnzeit", "verm",
+    "weitkred", "wohn", "bishkred", "beruf", "pers",
+    "telef", "gastarb",
+]
+
+RISK_THRESHOLDS = {"low": 30, "high": 70}

@@ -1,20 +1,28 @@
 import joblib
-from sk.learn.linear_model import LogesticRegression
-from sk.learn.random_ensemble import RandomForestClassifier
-from sk.learn.tree import DecisionTreeClassifier
-from config import RANDOM_STATE, MODEL_DIR
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.tree import DecisionTreeClassifier
+
+from config import MODEL_FILE, RANDOM_STATE
+
 
 def build_models():
     models = {
-        'logistic_regression': LogesticRegression(random_state=RANDOM_STATE, max_iter=1000),
-        'random_forest': RandomForestClassifier(random_state=RANDOM_STATE, n_estimators=100),
-        'decision_tree': DecisionTreeClassifier(random_state=RANDOM_STATE)
+        "logistic_regression": LogisticRegression(
+            random_state=RANDOM_STATE, max_iter=1000
+        ),
+        "decision_tree": DecisionTreeClassifier(random_state=RANDOM_STATE),
+        "random_forest": RandomForestClassifier(
+            random_state=RANDOM_STATE, n_estimators=100
+        ),
     }
     return models
+
 
 def train_single_model(model, X_train, y_train):
     model.fit(X_train, y_train)
     return model
+
 
 def train_all_models(models, X_train, y_train):
     trained_models = {}
@@ -22,17 +30,13 @@ def train_all_models(models, X_train, y_train):
     print("=" * 60)
     for name, model in models.items():
         print(f"Training {name}...")
-        train_model = train_single_model(model, X_train, y_train)
-        trained_models[name] = train_model
+        trained_model = train_single_model(model, X_train, y_train)
+        trained_models[name] = trained_model
         print(f"{name} trained successfully.")
-
     print("=" * 60)
     return trained_models
 
+
 def save_model(model):
     joblib.dump(model, MODEL_FILE)
-    print("This model has been saved successfully.")
-   
-if __name__ == "__main__":
-    print("This module has been imported by main.py.")
-    
+    print(f"Model saved to {MODEL_FILE}")
