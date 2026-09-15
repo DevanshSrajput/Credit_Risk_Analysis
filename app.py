@@ -1,10 +1,7 @@
-import os
-import sys
-
 import pandas as pd
 import streamlit as st
 
-from config import CATEGORICAL_FEATURES, MODELS_DIR, NUMERICAL_FEATURES, PREPROCESSOR_FILE
+from src.config import CATEGORICAL_FEATURES, MODELS_DIR, NUMERICAL_FEATURES, PREPROCESSOR_FILE
 
 st.set_page_config(page_title="Credit Risk Assessment", layout="wide")
 

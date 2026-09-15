@@ -1,8 +1,8 @@
 import pandas as pd
 import joblib
 
-from config import MODEL_FILE, PREPROCESSOR_FILE
-from riskscore import calculate_probability, calculate_risk_score, classify_risk
+from src.config import MODEL_FILE, PREPROCESSOR_FILE
+from src.risk_score import calculate_probability, calculate_risk_score, classify_risk
 
 
 def load_artifacts():

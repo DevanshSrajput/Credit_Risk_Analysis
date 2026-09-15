@@ -1,6 +1,6 @@
 import joblib
 
-from config import MODEL_FILE, PREPROCESSOR_FILE, RISK_THRESHOLDS
+from src.config import MODEL_FILE, PREPROCESSOR_FILE, RISK_THRESHOLDS
 
 
 def load_model():

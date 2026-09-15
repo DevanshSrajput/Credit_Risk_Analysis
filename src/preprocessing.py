@@ -4,7 +4,7 @@ from sklearn.compose import ColumnTransformer
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
-from config import (
+from src.config import (
     CATEGORICAL_FEATURES,
     NUMERICAL_FEATURES,
     PREPROCESSOR_FILE,

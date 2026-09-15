@@ -3,7 +3,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
 
-from config import MODEL_FILE, RANDOM_STATE
+from src.config import MODEL_FILE, RANDOM_STATE
 
 
 def build_models():

@@ -14,8 +14,8 @@ from sklearn.metrics import (
     roc_auc_score,
 )
 
-from config import FIGURES_DIR, MODEL_FILE, MODEL_METADATA_FILE, REPORTS_DIR
-from trainmodel import save_model
+from src.config import FIGURES_DIR, MODEL_FILE, MODEL_METADATA_FILE, REPORTS_DIR
+from src.train_model import save_model
 
 
 def evaluate_model(model, X_test, y_test):

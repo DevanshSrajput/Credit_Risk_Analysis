@@ -1,10 +1,6 @@
 import os
-import sys
 
-import pandas as pd
-
-from config import (
-    DATASET_PATH,
+from src.config import (
     FIGURES_DIR,
     MODELS_DIR,
     NUMERICAL_FEATURES,
@@ -12,12 +8,12 @@ from config import (
     REPORTS_DIR,
     TARGET_COLUMN,
 )
-from load_data import load_data, data_info
-from eda import eda_pipeline
-from evaluation import evaluate_all_models
-from feature_engineering import feature_engineering_pipeline
-from preprocessing import preprocess_data
-from trainmodel import build_models, train_all_models
+from src.data_loader import load_data, data_info
+from src.eda import eda_pipeline
+from src.evaluate import evaluate_all_models
+from src.feature_engineering import feature_engineering_pipeline
+from src.preprocessing import preprocess_data
+from src.train_model import build_models, train_all_models
 
 
 def main():

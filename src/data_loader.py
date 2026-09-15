@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 
-from config import DATASET_PATH, TARGET_COLUMN
+from src.config import DATASET_PATH, TARGET_COLUMN
 
 
 def load_data():
