@@ -1,6 +1,6 @@
 import joblib
 
-from src.config import MODEL_FILE, PREPROCESSOR_FILE, RISK_THRESHOLDS
+from src.config import BAD_CREDIT_CLASS, MODEL_FILE, PREPROCESSOR_FILE, RISK_THRESHOLDS
 
 
 def load_model():
@@ -14,7 +14,7 @@ def load_preprocessor():
 
 
 def calculate_probability(model, customer_data):
-    probability = model.predict_proba(customer_data)[:, 1]
+    probability = model.predict_proba(customer_data)[:, BAD_CREDIT_CLASS]
     return probability[0] if probability.ndim > 0 else probability
 
 

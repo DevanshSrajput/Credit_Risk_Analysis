@@ -14,18 +14,18 @@ from sklearn.metrics import (
     roc_auc_score,
 )
 
-from src.config import FIGURES_DIR, MODEL_FILE, MODEL_METADATA_FILE, REPORTS_DIR
+from src.config import BAD_CREDIT_CLASS, FIGURES_DIR, MODEL_FILE, MODEL_METADATA_FILE, REPORTS_DIR
 from src.train_model import save_model
 
 
 def evaluate_model(model, X_test, y_test):
     predictions = model.predict(X_test)
-    probability = model.predict_proba(X_test)[:, 1]
+    probability = model.predict_proba(X_test)[:, BAD_CREDIT_CLASS]
     accuracy = accuracy_score(y_test, predictions)
-    precision = precision_score(y_test, predictions)
-    recall = recall_score(y_test, predictions)
-    f1 = f1_score(y_test, predictions)
-    roc_auc = roc_auc_score(y_test, predictions)
+    precision = precision_score(y_test, predictions, pos_label=BAD_CREDIT_CLASS)
+    recall = recall_score(y_test, predictions, pos_label=BAD_CREDIT_CLASS)
+    f1 = f1_score(y_test, predictions, pos_label=BAD_CREDIT_CLASS)
+    roc_auc = roc_auc_score(y_test, -probability)
     metrics = {
         "accuracy": accuracy,
         "precision": precision,
@@ -52,7 +52,9 @@ def plot_confusion_matrix(y_test, predictions, model_name, output_dir):
 def plot_roc_curve(model, X_test, y_test, model_name, output_dir):
     from sklearn.metrics import RocCurveDisplay
 
-    display = RocCurveDisplay.from_estimator(model, X_test, y_test)
+    display = RocCurveDisplay.from_estimator(
+        model, X_test, y_test, pos_label=BAD_CREDIT_CLASS
+    )
     plt.title(f"{model_name} - ROC Curve")
     plt.tight_layout()
     os.makedirs(output_dir, exist_ok=True)

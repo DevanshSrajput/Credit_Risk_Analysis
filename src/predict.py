@@ -2,6 +2,7 @@ import pandas as pd
 import joblib
 
 from src.config import MODEL_FILE, PREPROCESSOR_FILE
+from src.feature_engineering import feature_engineering_pipeline
 from src.risk_score import calculate_probability, calculate_risk_score, classify_risk
 
 
@@ -12,6 +13,7 @@ def load_artifacts():
 
 
 def preprocess_input(customer_data, preprocessor):
+    customer_data = feature_engineering_pipeline(customer_data.copy())
     processed_data = preprocessor.transform(customer_data)
     return processed_data
 

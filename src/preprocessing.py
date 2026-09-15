@@ -12,6 +12,7 @@ from src.config import (
     TARGET_COLUMN,
     TEST_SIZE,
 )
+from src.feature_engineering import feature_engineering_pipeline
 
 
 def remove_duplicates(data):
@@ -52,6 +53,8 @@ def split_data(X, y):
 
 def preprocess_data(data):
     data = remove_duplicates(data)
+    data = feature_engineering_pipeline(data)
+
     X = data.drop(columns=[TARGET_COLUMN])
     y = data[TARGET_COLUMN]
 

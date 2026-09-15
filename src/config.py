@@ -21,12 +21,15 @@ MODEL_FILE = MODELS_DIR / "credit_risk_model.pkl"
 PREPROCESSOR_FILE = MODELS_DIR / "preprocessor.pkl"
 MODEL_METADATA_FILE = MODELS_DIR / "model_metadata.pkl"
 
-NUMERICAL_FEATURES = ["laufzeit", "hoehe", "alter"]
+NUMERICAL_FEATURES = ["laufzeit", "hoehe", "alter", "Credit_per_Month"]
 CATEGORICAL_FEATURES = [
     "laufkont", "moral", "verw", "sparkont", "beszeit",
     "rate", "famges", "buerge", "wohnzeit", "verm",
     "weitkred", "wohn", "bishkred", "beruf", "pers",
-    "telef", "gastarb",
+    "telef", "gastarb", "Longterm_Loan",
 ]
+
+BAD_CREDIT_CLASS = 0
+GOOD_CREDIT_CLASS = 1
 
 RISK_THRESHOLDS = {"low": 30, "high": 70}
